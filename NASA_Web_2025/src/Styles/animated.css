@@ -1,0 +1,150 @@
+/* animated.css */
+@keyframes moveImg3 {
+  0% {
+    left: var(--img3-initial-left); /* Posición inicial de img3 */
+    bottom: var(--img3-initial-bottom); /* Posición inicial de img3 */
+  }
+  100% {
+    left: var(--img3-target-left); /* Posición final de img3 */
+    bottom: var(--img3-target-bottom); /* Posición final de img3 */
+  }
+}
+
+@keyframes moveImg4 {
+  0% {
+    left: var(--img4-initial-left); /* Posición inicial de img4 */
+    bottom: var(--img4-initial-bottom); /* Posición inicial de img4 */
+  }
+  100% {
+    left: var(--img4-target-left); /* Posición final de img4 */
+    bottom: var(--img4-target-bottom); /* Posición final de img4 */
+  }
+}
+
+.pin {
+  animation-duration: 2s; /* Duración de la animación */
+  animation-timing-function: ease-in-out; /* Transición suave */
+  animation-fill-mode: forwards; /* Asegura que la animación termine en la posición final */
+}
+
+#img2, #img3, #img4 {
+  opacity: 0.95;  /* Ajusta el valor de opacidad entre 0 (totalmente transparente) y 1 (totalmente opaco) */
+}
+
+#img3 {
+  animation-name: moveImg3;
+}
+
+#img4 {
+  animation-name: moveImg4;
+}
+
+/* Animación para el cuadro de texto 1 */
+@keyframes moveText1 {
+  0% {
+    left: var(--text1-initial-left);
+    bottom: var(--text1-initial-bottom);
+    opacity: 0;  /* El texto está oculto al principio */
+  }
+  80% {
+    left: var(--text1-target-left);
+    bottom: var(--text1-target-bottom);
+    opacity: 0;  /* Aparece el texto */
+  }
+  100% {
+    left: var(--text1-target-left);
+    bottom: var(--text1-target-bottom);
+    opacity: 1;
+  }
+}
+
+/* Animación para el cuadro de texto 2 */
+@keyframes moveText2 {
+  0% {
+    left: var(--text2-initial-left);
+    bottom: var(--text2-initial-bottom);
+    opacity: 0;  /* El texto está oculto al principio */
+  }
+  80% {
+    left: var(--text2-target-left);
+    bottom: var(--text2-target-bottom);
+    opacity: 0;  /* Aparece el texto */
+  }
+  100% {
+    left: var(--text2-target-left);
+    bottom: var(--text2-target-bottom);
+    opacity: 1;
+  }
+}
+
+/* Estilo para los cuadros de texto */
+#text1, #text2 {
+  position: absolute;
+  width: 10vw; /* Tamaño ajustable */
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.333); /* Fondo oscuro con algo de transparencia */
+  color: rgb(134, 186, 14);
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 5px;
+  animation-duration: 2s; /* Duración de la animación */
+  animation-timing-function: ease-in-out; /* Suaviza la transición */
+  animation-fill-mode: forwards; /* Mantiene la posición final */
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  opacity: 0;
+  font-family: 'Orbitron', sans-serif;  
+}
+
+/* Efecto de escritura */
+#text1 {
+  animation-name: moveText1, typingText1;
+  animation-delay: 1s; /* El efecto de escritura comienza después de la animación de la imagen */
+}
+
+#text2 {
+  animation-name: moveText2, typingText2;
+  animation-delay: 2s; /* El efecto de escritura comienza después de la animación de la imagen */
+}
+
+/* Efecto de escribir letra por letra */
+@keyframes typingText1 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30%;
+  }
+}
+
+@keyframes typingText2 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30%;
+  }
+}
+
+/* Estilo común para <a> y <button> con clase .btn */
+#container .btn{
+  width:50%;
+  padding:15px;
+  margin:10px 0;
+  background-color:#00000088;
+  color:#fff;
+  border:2px solid #fff;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:1.5rem;
+  font-family:'Orbitron', sans-serif;
+  display:block;           /* hace que el <a> se comporte como botón */
+  text-align:center;
+  text-decoration:none;    /* quita subrayado del <a> */
+}
+
+/* Hover para ambos */
+#container .btn:hover{
+  background-color:#011b2a;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use</title>
+    <style>
+        /* Fondo de la página con imagen de URL */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1707587537206-14ad37434358?fm=jpg&q=60&w=3000');
+            background-size: cover;
+            background-position: center center;
+            color: #fff;
+        }
+
+        /* Barra superior azul marino */
+        #navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 9vh;
+            background-color: #0a1016;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            padding-left: 2vw;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #navbar-text {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Contenedor principal */
+        .container {
+            width: 85%;
+            margin: 100px auto 40px auto; /* 100px para dejar espacio por la navbar */
+            background-color: rgba(0, 0, 0, 0.85); /* fondo negro con opacidad */
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 40px;
+            font-size: 36px;
+        }
+
+        .tutorial {
+            margin-bottom: 40px;
+        }
+
+        .tutorial h2 {
+            color: #00aced;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #00aced;
+            padding-bottom: 8px;
+        }
+
+        .step {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step img {
+            max-width: 120px;
+            margin-right: 20px;
+            border-radius: 6px;
+        }
+
+        .step p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #f0f0f0;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Barra superior azul marino -->
+    <div id="navbar">
+        <span id="navbar-text">Exoplanet Detection Model</span>
+    </div>
+
+    <div class="container">
+        <h1>How to Use?</h1>
+
+        <!-- Tutorial 1: Analyze Data -->
+        <div class="tutorial">
+            <h2>Analyze Data</h2>
+            <div class="step">
+                <img src="images/home_proyect.png" alt="Home Project">
+                <p>Access the Home Project page to start the analysis.</p>
+            </div>
+            <div class="step">
+                <img src="images/select_analysis.png" alt="Select Analysis">
+                <p>Select the 'Analysis' option to begin.</p>
+            </div>
+            <div class="step">
+                <img src="images/fill_fields.png" alt="Fill Fields">
+                <p>Fill in the required fields with the light curve information.</p>
+            </div>
+            <div class="step">
+                <img src="images/upload_curve.png" alt="Upload Curve">
+                <p>Upload the light curve image of the star.</p>
+            </div>
+            <div class="step">
+                <img src="images/submit_button.png" alt="Submit">
+                <p>Click the 'Submit' button. The CNN model will return whether it is an exoplanet or not.</p>
+            </div>
+        </div>
+
+        <!-- Tutorial 2: Propose Model Improvements -->
+        <div class="tutorial">
+            <h2>Propose Model Improvements</h2>
+            <div class="step">
+                <img src="images/examine_button.png" alt="Examine Button">
+                <p>Select the 'Examine' button to upload a CSV file with improvement proposals.</p>
+            </div>
+            <div class="step">
+                <img src="images/send_button.png" alt="Send Button">
+                <p>Click 'Send' to submit your proposals to improve the model.</p>
+            </div>
+        </div>
+
+        <!-- Tutorial 3: Adjust Parameters -->
+        <div class="tutorial">
+            <h2>Adjust Parameters</h2>
+            <div class="step">
+                <img src="images/home_proyect.png" alt="Home Project">
+                <p>Access the Home Project page again.</p>
+            </div>
+            <div class="step">
+                <img src="images/tweak_model.png" alt="Tweak the Model">
+                <p>Select 'Tweak The Model' to adjust parameters as required.</p>
+            </div>
+            <div class="step">
+                <img src="images/send_button.png" alt="Send Button">
+                <p>Click 'Send'. The changes will be automatically saved.</p>
+            </div>
+        </div>
+
+    </div>
+  <!-- Footer -->
+  <footer>
+    <div>© 2025 ExoVita - NASA Space App Challenge</div>
+  </footer>
+
+</body>
+</html>
