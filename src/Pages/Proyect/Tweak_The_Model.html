@@ -72,14 +72,31 @@
     }
 
     /* Botón/enlace Back to Home sin subrayado */
-    .button{
-      display:inline-block; background:#0c1790; color:#c2cde7;
-      padding:15px 30px; border-radius:8px; font-size:18px;
-      margin:60px 0 0; text-decoration:none;
-      transition:background-color .3s ease, transform .08s ease;
+    .button {
+        display: inline-block;
+        padding: 10px 25px; /* Reduced padding */
+        background-color: #0c439b;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 16px; /* Reduced font size */
+        text-decoration: none;
+        text-align: center;
+        border-radius: 8px;
+        border: 2px solid #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0 auto; /* Center the button */
+        display: block; /* Make the button a block element for centering */
+        margin-bottom: 20px; /* Added bottom margin for space */
+        margin-top: 20px
     }
-    .button:hover{ background:#005f73; }
-    .button:active{ transform:translateY(1px); }
+    .button:hover {
+        background-color: #0b3873;
+    }
+    .button:active {
+        background-color: #082a57;
+    }
     /* Barra superior azul marino */
         #navbar {
             position: absolute;
@@ -171,7 +188,9 @@
   </div>
 
   <!-- Back -->
-  <a class="button" href="../../index.html">Back to Home</a>
+  <a href="../Home_Proyect.html">
+      <button class="button">Back to Menu</button>
+  </a>
   <!-- Footer -->
   <footer>
     <div>© 2025 ExoVita - NASA Space App Challenge</div>

@@ -62,19 +62,29 @@
         }
 
         .button {
-            background-color: #0c1790;
-            color:#c2cde7;
-            padding: 15px 30px;
+            display: inline-block;
+            padding: 10px 25px; /* Reduced padding */
+            background-color: #0c439b;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px; /* Reduced font size */
+            text-decoration: none;
+            text-align: center;
             border-radius: 8px;
-            font-size: 18px;
-            margin-top: 20px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 80px;
+            transition: all 0.3s ease;
+            margin: 0 auto; /* Center the button */
+            display: block; /* Make the button a block element for centering */
+            margin-bottom: 20px; /* Added bottom margin for space */
+            margin-top: 20px
         }
-
         .button:hover {
-            background-color: #005f73;
+            background-color: #0b3873;
+        }
+        .button:active {
+            background-color: #082a57;
         }
     </style>
 </head>

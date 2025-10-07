@@ -139,13 +139,31 @@
     #container button:hover {
       background-color: #011b2a;
     }
+    /* Botón para regresar a la landing (pegado al lado derecho del #container) */
+.back-btn{
+  position: absolute;
+  right: -22vw;          /* fuera del cuadro, a su derecha */
+  top: 96%;
+  transform: translateY(-50%);
+  padding: 12px 16px;
+  background-color: #00000088;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  z-index: 21;           /* por encima del contenedor */
+}
+.back-btn:hover{ background-color:#011b2a; }
+
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Barra superior azul marino -->
   <div id="navbar">
-    <span id="navbar-text">ExoVita</span>
+    <span id="navbar-text">ExoVita - Exoplanet Detection Model</span>
   </div>
 
   <!-- Fondo: Imagen 1 -->
@@ -177,6 +195,7 @@
       <a class="btn" href="./Proyect/How_to_Use.html">How to use?</a>
       <a class="btn" href="./Proyect/Training_Data_Proposal.html">Training Data Proposal</a>
       <a class="btn" href="./Proyect/Tweak_The_Model.html">Tweak The Model</a>
+      <a href="../../index.html" class="back-btn" aria-label="Regresar a la landing">⟵ Return to Landing Page</a>
     </div>
 
      <!-- Cuadros de texto animados -->
