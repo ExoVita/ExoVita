@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NASA Web 2025 - A World Away</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0B1E3F;
+      --accent: #1F6FEB;
+      --text-light: #FFFFFF;
+      --highlight: #85C1E9;
+      --button-bg: #008CBA;
+      --button-hover: #007B9E;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-image: url('src/Assets/Images/Imagen_nasa1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: var(--text-light);
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--highlight);
+      text-shadow: 0 0 10px rgba(133, 193, 233, 0.6);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .links a {
+      background-color: var(--button-bg);
+      color: var(--text-light);
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .links a:hover {
+      background-color: var(--button-hover);
+    }
+
+    .summary {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 900px;
+      line-height: 1.6;
+      font-size: 1rem;
+      box-shadow: 0 0 20px rgba(31, 111, 235, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .links a {
+        font-size: 0.9rem;
+        padding: 10px 18px;
+      }
+
+      .summary {
+        font-size: 0.95rem;
+      }
+    }
+    
+    h3{ color: transparent;}
+  </style>
+</head>
+<body>
+  <h1>🌌 NASA Space Apps Challenge 2025</h1>
+  <div class="subtitle">
+    <strong>A World Away:</strong> Hunting for Exoplanets with AI  
+    <br />Join the challenge and help discover new worlds beyond our solar system.
+  </div>
+
+  <div class="links">
+    <a href="src/Pages/Home_Proyect.html">Home Project</a>
+    <a href="src/Pages/Who_We_Are_Page.html">Who We Are</a>
+    <a href="src/Pages/Recognition_Page.html">Recognition</a>
+    <a href="src/Pages/Resources_Page.html">Resources</a>
+  </div>
+
+  <div class="summary">
+    <h2>🚀 Challenge Summary</h2>
+    <p>
+      Data from space-based missions like Kepler, K2, and TESS have revealed thousands of exoplanets. Most were identified manually, but with AI/ML, we can automate this process. Your mission is to build a model that analyzes NASA’s open datasets to detect new exoplanets—and create a web interface for researchers and enthusiasts to interact with the data.
+    </p>
+    <p>
+      Consider how orbital period, transit duration, and planetary radius affect classification. Will your interface allow uploads, model updates, or hyperparameter tuning? The possibilities are endless.
+    </p>
+    <p>
+      This challenge is perfect for advanced users passionate about space, data science, and machine learning. Let’s explore the unknown together.
+    </p>
+  </div>
+  
+  <h3>Upload Light Curve CSV</h3>
+  
+  <h3>Upload Light Curve CSV</h3>
+  <!-- Footer -->
+  <footer>
+    <div>© 2025 ExoVita - NASA Space App Challenge</div>
+  </footer>
+</body>
+</html>
+

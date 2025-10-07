@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>References - NASA Web 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('../Assets/Images/Espacio.jpg'); /* Asegúrate de que la ruta sea correcta */
+            background-size: cover;  /* Esto asegura que la imagen cubra todo el fondo */
+            background-position: center;  /* Esto centra la imagen */
+            background-attachment: fixed; /* Hace que la imagen se quede fija mientras se hace scroll */
+        }
+        header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.862); /* Fondo oscuro y algo transparente */
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .references-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            padding: 20px;
+        }
+        .reference-box {
+            background-color: #d2d4d5a7;
+            border: 1px solid #d2d4d555;
+            border-radius: 8px;
+            width: 250px;
+            margin: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .reference-box:hover {
+            transform: scale(1.05);
+        }
+        .reference-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .reference-citation {
+            color: #1c1a1a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        References
+    </header>
+
+    <div class="references-container">
+        <div class="reference-box" onclick="window.open('https://repositorio.unican.es/xmlui/bitstream/handle/10902/30224/VillegasPerezIvan.pdf?sequence=1&isAllowed=y', '_blank')">
+            <div class="reference-title">Simulation, detection and characterization of exoplanet’s transits</div>
+            <div class="reference-citation">Villegas Pérez, I. (2023). Retrieved from repository.</div>
+        </div>
+        
+        <div class="reference-box" onclick="window.open('https://theaveragescientist.co.uk/2023/05/05/keplers-laws-of-planetary-motion-part-3-the-law-of-periods/', '_blank')">
+            <div class="reference-title">Kepler’s laws of planetary motion: Part 3</div>
+            <div class="reference-citation">The Average Scientist. (2023, May 5). Retrieved from The Average Scientist.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://esero.es/practicas-en-abierto/exoplanetas-secundaria/mini_reto_2_construye_tu_star_box_y_reproduce_un_trnsito_vamos_a_detectar_exoplanetas.html', '_blank')">
+            <div class="reference-title">MINI RETO 2: Construye tu "Star Box"</div>
+            <div class="reference-citation">ESERO España. (n.d.). Retrieved from ESERO España.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://doi.org/10.1093/mnras/stab1229', '_blank')">
+            <div class="reference-title">Exoplanet detection using machine learning</div>
+            <div class="reference-citation">Malik, A., Moster, B. P., & Obermeier, C. (2021). Monthly Notices of the Royal Astronomical Society, 513(4), 5505–5523.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://lco.global/spacebook/exoplanets/transit-method/', '_blank')">
+            <div class="reference-title">Transit Method</div>
+            <div class="reference-citation">LCO Global. (n.d.). Retrieved from LCO Global.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://cienciadedatos.net/documentos/62_optimizacion_bayesianahiperparametros', '_blank')">
+            <div class="reference-title">Optimización bayesiana de hiperparámetros</div>
+            <div class="reference-citation">Ciencia de Datos. (n.d.). Retrieved from Ciencia de Datos.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://ocw.mit.edu/courses/12-425-extrasolar-planets-physics-and-detection-techniques-fall-2007/', '_blank')">
+            <div class="reference-title">Extrasolar Planets: Physics and Detection Techniques</div>
+            <div class="reference-citation">MIT OpenCourseWare. (n.d.). Retrieved from MIT OpenCourseWare.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://lweb.cfa.harvard.edu/~avanderb/kepler90i.pdf', '_blank')">
+            <div class="reference-title">IDENTIFYING EXOPLANETS WITH DEEP LEARNING</div>
+            <div class="reference-citation">Van der Burg, A. (n.d.). Harvard-Smithsonian Center for Astrophysics. Retrieved from Harvard-Smithsonian Center.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=cumulative', '_blank')">
+            <div class="reference-title">NASA Exoplanet Archive</div>
+            <div class="reference-citation">NASA Exoplanet Archive. (n.d.). Retrieved from NASA Exoplanet Archive.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://medium.com/@abhishekjainindore24/understanding-the-1d-convolutional-layer-in-deep-learning-7a4cb994c981', '_blank')">
+            <div class="reference-title">Understanding the ID convolutional layer in deep learning</div>
+            <div class="reference-citation">Jain, A. (2020, October 29). Retrieved from Medium.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://www.geeksforgeeks.org/deep-learning/what-is-a-1d-convolutional-layer-in-deep-learning/', '_blank')">
+            <div class="reference-title">What is a 1D convolutional layer in Deep learning?</div>
+            <div class="reference-citation">GeeksforGeeks. (n.d.). Retrieved from GeeksforGeeks.</div>
+        </div>
+
+        <div class="reference-box" onclick="window.open('https://drive.google.com/drive/u/5/folders/1LKveLlIlBv2TlxBz55JupdhkdKgkV4q6', '_blank')">
+            <div class="reference-title">Astronomy Space Images</div>
+            <div class="reference-citation">Kepleer, C. (2025). Retrieved from Google Drive.</div>
+        </div>
+    </div>
+  <!-- Footer -->
+  <footer>
+    <div>© 2025 ExoVita - NASA Space App Challenge</div>
+  </footer>
+</body>
+</html>

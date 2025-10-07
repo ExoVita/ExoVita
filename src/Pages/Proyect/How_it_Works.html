@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How it Works</title>
+
+  <!-- Tus animaciones van aquí -->
+  <link rel="stylesheet" href="src/Styles/animated.css">
+
+  <style>
+    :root{
+      --brand:#13042e;
+      --brand-2:#000000;
+      --ink:#ffffff;
+      --muted:#ffffff;
+      --bg: url("https://images.unsplash.com/photo-1707587537206-14ad37434358?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover no-repeat fixed;
+      --radius:20px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --maxw:1500px;
+      --section-min: 80vh;
+      --brand-alpha: rgba(0, 0, 0, 0.85);
+    }
+
+    /* Reset mínimo */
+    *,*::before,*::after{ box-sizing:border-box; }
+    body{
+      margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      color:var(--ink); background:var(--bg); line-height:1.6;
+      scroll-behavior:smooth;
+    }
+    img{ max-width:100%; display:block; }
+
+    a.btn{
+      text-decoration: none; 
+      display: inline-block;
+    }
+
+    /* Barra superior azul marino */
+    #navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 9vh;
+      background-color: #0a1016;
+      z-index: 15;
+      display: flex;
+      align-items: center;
+      padding-left: 2vw;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    #navbar-text {
+      font-size: 1.5rem;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Título "HOW IT WORK?" antes de la primera sección */
+    #hero-title {
+      font-size: 3rem;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      text-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      padding-top: 100px; /* Espacio superior para separar el título */
+      margin-bottom: 40px; /* Espacio entre el título y la primera sección */
+    }
+
+    /* Contenedor de cada sección con fondo negro y opacidad */
+    .stage {
+      background-color: rgba(0, 0, 0, 0.7); /* Fondo negro con opacidad */
+      color: #f0f3ff;
+      padding: 40px;
+      margin: 20px auto; /* Centra el contenedor horizontalmente */
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 80%; /* Ancho del 80% */
+      max-width: 1200px; /* Ancho máximo, ajustable según tu preferencia */
+    }
+
+    .stage h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      color: #00bcd4;
+      margin-bottom: 10px;
+    }
+
+    .stage p {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #f0f3ff;
+    }
+
+    .stage ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .stage li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .stage li strong {
+      color: #00bcd4;
+    }
+
+    /* Responsividad */
+    @media (max-width: 980px){
+      .stage { padding: 20px; }
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Barra superior azul marino -->
+  <div id="navbar">
+    <span id="navbar-text">Exoplanet Detection Model</span>
+  </div>
+
+  <!-- Título "HOW IT WORK?" antes de la primera sección -->
+  <div id="hero-title">HOW IT WORK?</div>
+
+  <!-- Sección 1: Initial Data and Purpose -->
+  <section class="stage reveal" id="initial_data" aria-label="initial_data">
+    <div class="text">
+      <h2>1. Initial Data and Purpose</h2>
+      <p>
+        The model is based on light curve data from exoplanets obtained from missions like Kepler and TESS. 
+        The light curve shows how a star’s brightness changes over time. When a planet passes in front of its star 
+        from our perspective, it causes a small decrease in brightness, creating a dip in the light curve. This phenomenon 
+        is used to identify potential exoplanets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sección 2: Metadata and Data Preprocessing -->
+  <section class="stage reveal" id="preprocessing" aria-label="preprocessing">
+    <div class="text">
+      <h2>2. Metadata and Data Preprocessing</h2>
+      <p>
+        To train a machine learning model, it’s necessary to have structured and processed data. In this case, 
+        the following essential data is gathered for each star to be analyzed:
+      </p>
+      <ul>
+        <li><strong>Source identification:</strong> Includes the star identifier, such as KIC for Kepler or TIC for TESS.</li>
+        <li><strong>Light curve:</strong> Data about relative luminosity (flux), errors in measurements (flux_err), and other metadata associated with each light curve.</li>
+        <li><strong>Astrophysical parameters:</strong> Such as orbital period, transit epoch, relative radius of the planet, and orbital inclination.</li>
+      </ul>
+      <p>
+        The preprocessing of this data involves several stages, such as:
+      </p>
+      <ul>
+        <li><strong>Downloading the light curves:</strong> Associated with the star’s KIC/TIC identifier.</li>
+        <li><strong>Cleaning the signal:</strong> To remove noise, like “commercials” (slow variations) and blurry scenes (unrelated transients).</li>
+        <li><strong>Temporal alignment:</strong> Adjusting the light curves according to the orbital period and transit epoch so that all signals related to the transit align and are clearly visible.</li>
+      </ul>
+      <p><strong>Generation of two views:</strong></p>
+      <ul>
+        <li><strong>Global view (panorama):</strong> A summary of the light curve of the star over the entire orbit.</li>
+        <li><strong>Local view (zoom):</strong> A window focused only on the transit event.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sección 3: Machine Learning Model -->
+  <section class="stage reveal" id="ml_model" aria-label="ml_model">
+    <div class="text">
+      <h2>3. Machine Learning Model</h2>
+      <p>
+        With preprocessed data, the machine learning model is trained using a set of convolutional neural networks (CNNs), 
+        which are highly effective for processing and analyzing images or time-sequence data. The model takes two "numerical images," 
+        corresponding to the global and local views of the light curve, and looks for patterns within them that indicate the presence 
+        of a planetary transit.
+      </p>
+      <p><strong>Training steps include:</strong></p>
+      <ul>
+        <li><strong>Inputs:</strong> Two inputs are defined for the model: one for the global view and another for the local view.</li>
+        <li><strong>Convolutional branch:</strong> Each input passes through a convolutional branch that looks for patterns within the temporal data. Several convolutional layers (Conv1D) are used to extract features, followed by MaxPool1D layers to reduce dimensionality.</li>
+        <li><strong>Merging the branches:</strong> The outputs of both branches (global and local) are combined to form a richer representation of the light curve.</li>
+        <li><strong>Transit prediction:</strong> A Dense layer with a sigmoid activation function generates a probability indicating the presence of a planetary transit.</li>
+        <li><strong>Training and Optimization:</strong> The model is trained using the Adam optimization algorithm and the binary_crossentropy loss function.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sección 4: Model Evaluation -->
+  <section class="stage reveal" id="model_evaluation" aria-label="model_evaluation">
+    <div class="text">
+      <h2>4. Model Evaluation</h2>
+      <p>
+        During training, metrics such as AUC (Area Under the ROC Curve), Precision, and Recall are used to evaluate the model's performance. 
+        Precision measures how many of the positive predictions are actually correct, while recall measures how many of the true events (transits) 
+        the model successfully detects.
+      </p>
+      <p>
+        Additionally, the decision threshold is adjusted to optimize the balance between precision and recall. Depending on the project's objectives, 
+        recall can be prioritized to ensure fewer exoplanets are missed, although this might increase the number of false positives.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sección 5: Model Application -->
+  <section class="stage reveal" id="model_application" aria-label="model_application">
+    <div class="text">
+      <h2>5. Model Application</h2>
+      <p>
+        Once trained and validated, the model can be used to predict the probability that new light curves correspond to a planetary transit. 
+        These models can process large amounts of data from missions like Kepler and TESS, providing an automated and efficient analysis.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sección 6: Considerations for Identifying Exoplanets -->
+  <section class="stage reveal" id="considerations" aria-label="considerations">
+    <div class="text">
+      <h2>6. Considerations for Identifying Exoplanets</h2>
+      <p>
+        The model doesn’t just rely on the presence of a dip in brightness to identify a transit, but also on additional characteristics that help 
+        differentiate between real transits and false positives, such as:
+      </p>
+      <ul>
+        <li><strong>Shape of the curve:</strong> A true transit generally exhibits a U or V shape, while other phenomena like eclipsing binary stars may produce larger dips.</li>
+        <li><strong>Duration of the transit:</strong> Exoplanet transits typically last a few hours to a day.</li>
+        <li><strong>Symmetry and center shift:</strong> The shape and symmetry of the curve are indicative of a planetary transit.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2025 ExoVita - NASA Space App Challenge</div>
+  </footer>
+
+</body>
+</html>

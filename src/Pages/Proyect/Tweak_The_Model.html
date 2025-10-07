@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tweak The Model — NASA Web 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    /* === Hereda tu look: Orbitron + fondo + colores === */
+    body{
+      font-family:'Orbitron',sans-serif;
+      color:#ffffff;
+      padding:40px 20px;
+      text-align:center;
+      background-image:url('https://img.freepik.com/vector-gratis/fondo-cielo-espacial-acuarela-pintada-mano_1048-19009.jpg?semt=ais_incoming&w=740&q=80'); /* ajusta si es necesario */
+      background-size:cover; background-position:center; background-repeat:no-repeat;
+      min-height:100vh;
+    }
+    h1{ font-size:3rem; margin:60px 0 20px; }
+
+    /* Pestaña tipo “pill” como en tu UI */
+    .tab{
+      display:inline-block;
+      padding:16px 28px;
+      background:#08202b;
+      border:3px solid #cfe6ff;
+      border-radius:18px;
+      box-shadow:0 0 0 4px rgba(255,255,255,.08) inset, 0 10px 30px rgba(0,0,0,.25);
+      font-size:1.8rem;
+      margin:6px auto 18px;
+    }
+
+    /* Panel oscuro semitransparente (similar a .member) */
+    .panel{
+      margin:0 auto;
+      max-width:900px;
+      text-align:left;
+      background:rgba(43,58,89,.9);
+      padding:24px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .field{ margin:14px 0 10px; }
+    .label-row{ display:flex; justify-content:space-between; align-items:baseline; }
+    .label{ font-size:1.05rem; }
+    .hint{ font-size:12px; opacity:.85; }
+    .row{ display:flex; gap:12px; align-items:center; }
+    .slider{ flex:1; }
+    .num{
+      width:130px; padding:8px 10px; border-radius:8px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(0,0,0,.25); color:#fff; font-family:inherit;
+    }
+    .meta{ font-size:12px; opacity:.85; margin-top:6px; }
+
+    pre.code{
+      margin-top:18px; background:rgba(0,0,0,.35);
+      padding:16px; border-radius:12px;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;
+      font-size:12px; max-height:240px; overflow:auto;
+    }
+
+    .actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
+    .btn-primary{
+      background:#0c1790; color:#c2cde7; padding:10px 18px;
+      border:none; border-radius:10px; cursor:pointer;
+    }
+    .btn-secondary{
+      background:transparent; color:#cfe6ff; padding:10px 18px;
+      border:1px solid #cfe6ff; border-radius:10px; cursor:pointer;
+    }
+
+    /* Botón/enlace Back to Home sin subrayado */
+    .button{
+      display:inline-block; background:#0c1790; color:#c2cde7;
+      padding:15px 30px; border-radius:8px; font-size:18px;
+      margin:60px 0 0; text-decoration:none;
+      transition:background-color .3s ease, transform .08s ease;
+    }
+    .button:hover{ background:#005f73; }
+    .button:active{ transform:translateY(1px); }
+    /* Barra superior azul marino */
+        #navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 9vh;
+            background-color: #0a1016;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            padding-left: 2vw;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #navbar-text {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+    @media (max-width:480px){
+      .tab{ font-size:1.4rem; padding:12px 22px; }
+      h1{ font-size:2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR replicada -->
+  <div id="navbar">
+    <span id="navbar-text">Exoplanet Detection Model</span>
+  </div>
+
+  <h1>Tweak The Model</h1>
+
+  <div class="panel">
+    <!-- Learning Rate (log slider 1e-6 .. 1e-2) -->
+    <div class="field">
+      <div class="label-row">
+        <label class="label">Learning Rate</label>
+        <span class="hint">1e-6 → 1e-2 (log slider con ticks)</span>
+      </div>
+      <div class="row">
+        <input id="lrLog" class="slider" type="range" min="-6" max="-2" step="0.01" list="lr_ticks">
+        <input id="lrNum" class="num" type="number" step="0.00001" min="0.000001" max="0.01">
+      </div>
+      <datalist id="lr_ticks">
+        <option value="-6" label="1e-6"></option>
+        <option value="-5" label="1e-5"></option>
+        <option value="-4" label="1e-4"></option>
+        <option value="-3" label="1e-3"></option>
+        <option value="-2" label="1e-2"></option>
+      </datalist>
+      <div class="meta">Controls optimization step size; smaller = slower but steadier.</div>
+    </div>
+
+    <!-- Sliders con tags personalizadas (se expanden abajo con JS) -->
+    <RangeInt   id="batchSize"    label="Batch Size"             min="16"  max="128" step="16"  desc="Samples per weight update."></RangeInt>
+    <RangeFloat id="dropout"      label="Dropout Rate"           min="0.1" max="0.5" step="0.05" desc="Fraction of units dropped in dense/CNN trunk."></RangeFloat>
+    <RangeInt   id="epochs"       label="Number of Epochs"       min="10"  max="200" step="10"  desc="Full passes over the dataset."></RangeInt>
+    <RangeInt   id="lstmUnits"    label="LSTM Units"             min="64"  max="512" step="64"  desc="Neurons in LSTM layers."></RangeInt>
+    <RangeInt   id="cnnUnits"     label="CNN Units"              min="32"  max="512" step="64"  desc="Filters per conv block."></RangeInt>
+    <RangeInt   id="kernelSize"   label="Kernel Size (CNN)"      min="3"   max="7"   step="1"   desc="Filter length; larger = broader patterns."></RangeInt>
+    <RangeInt   id="stride"       label="Stride (CNN)"           min="1"   max="3"   step="1"   desc="Downsampling rate in convs."></RangeInt>
+    <RangeFloat id="lstmDropout"  label="LSTM Dropout"           min="0.1" max="0.5" step="0.05" desc="Dropout inside LSTM."></RangeFloat>
+
+    <!-- LR Scheduler -->
+    <div class="field">
+      <div class="label-row">
+        <label class="label">Learning Rate Scheduler</label>
+        <span class="hint">ReduceLROnPlateau</span>
+      </div>
+      <label style="display:inline-flex; gap:8px; align-items:center; cursor:pointer;">
+        <input id="useLRScheduler" type="checkbox" />
+        <span>Use scheduler</span>
+      </label>
+      <div class="meta">Auto-reduces LR when validation plateaus.</div>
+    </div>
+
+    <RangeInt   id="numConvLayers" label="Number of Conv Layers" min="1" max="4" step="1" desc="Depth of convolutional stack."></RangeInt>
+
+    <!-- Live JSON -->
+    <pre id="configPreview" class="code"></pre>
+
+    <div class="actions">
+      <button id="btnReset" class="btn-secondary">Reset</button>
+      <button id="btnSend"  class="btn-primary">Save</button>
+    </div>
+  </div>
+
+  <!-- Back -->
+  <a class="button" href="../../index.html">Back to Home</a>
+  <!-- Footer -->
+  <footer>
+    <div>© 2025 ExoVita - NASA Space App Challenge</div>
+  </footer>
+
+  <!-- ====== JS: expansión de tags + sliders con límites, ticks, y envío a Make ====== -->
+  <script>
+    /* =================== Helpers =================== */
+    const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+    const toPrec = (v, prec = 8) => Number.parseFloat(Number(v).toPrecision(prec));
+    const getStepDecimals = (step) => {
+      if (!isFinite(step)) return 0;
+      const s = String(step);
+      if (s.includes('e-')) return Number(s.split('e-')[1]); // 1e-5 -> 5
+      const i = s.indexOf('.');
+      return i === -1 ? 0 : (s.length - i - 1);
+    };
+    const roundToStep = (value, step, min) => {
+      // redondea al múltiplo de step desde min
+      const decimals = getStepDecimals(step);
+      const snapped = Math.round((value - min) / step) * step + min;
+      return Number(snapped.toFixed(decimals));
+    };
+
+    /* ========== Expande <RangeInt>/<RangeFloat> a controles reales con datalist de ticks ========== */
+    function expandCustomTags(){
+      document.querySelectorAll('RangeInt, RangeFloat').forEach(node=>{
+        const isFloat = node.tagName.toLowerCase()==='rangefloat';
+        const id = node.getAttribute('id');
+        const label = node.getAttribute('label') || id;
+        const min = node.getAttribute('min');
+        const max = node.getAttribute('max');
+        const step = node.getAttribute('step');
+        const desc = node.getAttribute('desc') || '';
+
+        node.outerHTML = `
+          <div class="field">
+            <div class="label-row">
+              <label class="label">${label}</label>
+              <span class="hint">min ${min} • max ${max} • step ${step}</span>
+            </div>
+            <div class="row">
+              <input id="${id}__slider" class="slider" type="range"
+                     min="${min}" max="${max}" step="${step}" list="${id}__ticks">
+              <datalist id="${id}__ticks"></datalist>
+              <input id="${id}__num" class="num" type="number"
+                     min="${min}" max="${max}" step="${step}">
+            </div>
+            ${desc ? `<div class="meta">${desc}</div>` : ``}
+          </div>
+        `;
+      });
+    }
+    expandCustomTags();
+
+    /* =================== Config por defecto =================== */
+    const DEFAULTS = {
+      learningRate: 1e-4,
+      batchSize: 32,
+      dropout: 0.3,
+      epochs: 50,
+      lstmUnits: 128,
+      cnnUnits: 64,
+      kernelSize: 5,
+      stride: 1,
+      lstmDropout: 0.2,
+      useLRScheduler: true,
+      numConvLayers: 2,
+    };
+    const cfg = { ...DEFAULTS };
+    const byId = (id) => document.getElementById(id);
+
+    /* =================== Learning Rate (log) =================== */
+    const LR_MIN_EXP = -6, LR_MAX_EXP = -2; // slider: -6..-2
+
+    function syncLRInputs() {
+      byId('lrLog').value = Math.log10(cfg.learningRate);
+      byId('lrNum').value = cfg.learningRate;
+    }
+
+    function initLR() {
+      const lrLog = byId('lrLog');
+      const lrNum = byId('lrNum');
+
+      lrLog.min = LR_MIN_EXP; lrLog.max = LR_MAX_EXP; lrLog.step = 0.01;
+
+      // eventos
+      lrLog.addEventListener('input', (e)=>{
+        let exp = clamp(Number(e.target.value), LR_MIN_EXP, LR_MAX_EXP);
+        const lr = Math.pow(10, exp);
+        cfg.learningRate = roundToStep(lr, 1e-5, 0); // respeta step del num
+        lrNum.value = cfg.learningRate;
+        render();
+      });
+
+      lrNum.addEventListener('input', (e)=>{
+        const vRaw = Number(e.target.value || 0);
+        let v = clamp(vRaw, 1e-6, 1e-2);
+        v = roundToStep(v, 1e-5, 0);
+        cfg.learningRate = toPrec(v, 8);
+        lrLog.value = Math.log10(cfg.learningRate);
+        lrNum.value = cfg.learningRate;
+        render();
+      });
+
+      lrNum.min = 1e-6; lrNum.max = 1e-2; lrNum.step = 1e-5;
+      syncLRInputs();
+    }
+
+    /* ========== Sliders numéricos con límites + ticks + snap a step ========== */
+    function attachRangeHandlers(id, isFloat=false) {
+      const slider = byId(id + '__slider');
+      const number = byId(id + '__num');
+
+      const min = Number(slider.min);
+      const max = Number(slider.max);
+      const step = Number(slider.step);
+
+      // datalist ticks
+      const list = byId(id + '__ticks');
+      list.innerHTML = '';
+      let tick = min, guard=0;
+      while (tick <= max + 1e-12 && guard < 5000) {
+        const opt = document.createElement('option');
+        opt.value = String(tick);
+        list.appendChild(opt);
+        tick = roundToStep(tick + step, step, min);
+        guard++;
+      }
+
+      slider.addEventListener('input', (e)=>{
+        let v = Number(e.target.value);
+        v = clamp(v, min, max);
+        v = roundToStep(v, step, min);
+        cfg[id] = isFloat ? v : Math.round(v);
+        number.value = cfg[id];
+        render();
+      });
+
+      number.addEventListener('input', (e)=>{
+        let v = Number(e.target.value || min);
+        v = clamp(v, min, max);
+        v = roundToStep(v, step, min);
+        cfg[id] = isFloat ? v : Math.round(v);
+        slider.value = cfg[id];
+        number.value = cfg[id];
+        render();
+      });
+    }
+
+    /* =================== Reset / Vista previa =================== */
+    function render(){
+      byId('configPreview').textContent = JSON.stringify(cfg, null, 2);
+    }
+    function resetAll(){
+      Object.assign(cfg, DEFAULTS);
+      syncLRInputs();
+      [
+        'batchSize','dropout','epochs','lstmUnits','cnnUnits',
+        'kernelSize','stride','lstmDropout','numConvLayers'
+      ].forEach(id=>{
+        byId(id+'__slider').value = cfg[id];
+        byId(id+'__num').value = cfg[id];
+      });
+      byId('useLRScheduler').checked = cfg.useLRScheduler;
+      render();
+    }
+
+    /* =================== Enviar a Make (strings[]) =================== */
+    const MAKE_URL = "https://hook.us2.make.com/qfowbknyimrttbpuu9vcd13owh10g9a3";
+
+    function sendToMake(){
+      // Orden fijo → strings[1]..strings[11]
+      const strings = [
+        String(cfg.learningRate),                 // [1]
+        String(cfg.batchSize),                    // [2]
+        String(cfg.dropout),                      // [3]
+        String(cfg.epochs),                       // [4]
+        String(cfg.lstmUnits),                    // [5]
+        String(cfg.cnnUnits),                     // [6]
+        String(cfg.kernelSize),                   // [7]
+        String(cfg.stride),                       // [8]
+        String(cfg.lstmDropout),                  // [9]
+        cfg.useLRScheduler ? "true" : "false",    // [10]
+        String(cfg.numConvLayers)                 // [11]
+      ];
+
+      fetch(MAKE_URL, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ strings })   // arreglo llamado 'strings'
+      })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        alert("Enviado a Make ✅");
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Error enviando a Make ❌ (revisa la consola)");
+      });
+    }
+
+    /* =================== Init =================== */
+    function initForm(){
+      // LR
+      initLR();
+
+      // checkbox
+      const cb = byId('useLRScheduler');
+      cb.checked = cfg.useLRScheduler;
+      cb.addEventListener('change', e=>{
+        cfg.useLRScheduler = e.target.checked; render();
+      });
+
+      // sliders
+      [
+        {id:'batchSize',min:16,max:128,step:16,isFloat:false},
+        {id:'dropout',min:0.1,max:0.5,step:0.05,isFloat:true},
+        {id:'epochs',min:10,max:200,step:10,isFloat:false},
+        {id:'lstmUnits',min:64,max:512,step:64,isFloat:false},
+        {id:'cnnUnits',min:32,max:512,step:64,isFloat:false},
+        {id:'kernelSize',min:3,max:7,step:1,isFloat:false},
+        {id:'stride',min:1,max:3,step:1,isFloat:false},
+        {id:'lstmDropout',min:0.1,max:0.5,step:0.05,isFloat:true},
+        {id:'numConvLayers',min:1,max:4,step:1,isFloat:false},
+      ].forEach(({id,min,max,step,isFloat})=>{
+        const s = byId(id+'__slider');
+        const n = byId(id+'__num');
+        s.min=min; s.max=max; s.step=step;
+        n.min=min; n.max=max; n.step=step;
+        s.value = cfg[id]; n.value = cfg[id];
+        attachRangeHandlers(id, isFloat);
+      });
+
+      // botones
+      byId('btnReset').addEventListener('click', resetAll);
+      byId('btnSend').addEventListener('click', sendToMake);
+
+      render();
+    }
+
+    document.addEventListener('DOMContentLoaded', initForm);
+  </script>
+</body>
+</html>
